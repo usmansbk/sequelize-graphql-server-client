@@ -4,7 +4,7 @@ import { Outlet } from "react-router-dom";
 import { Toaster } from "react-hot-toast";
 import { useAppTheme } from "api/graphql/hooks/app";
 
-function RootLayout() {
+export default function RootLayout() {
   const { mode } = useAppTheme();
   const theme = useMemo(
     () =>
@@ -32,5 +32,3 @@ function RootLayout() {
     </ThemeProvider>
   );
 }
-
-export default RootLayout;

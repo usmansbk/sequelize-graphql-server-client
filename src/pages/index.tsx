@@ -10,11 +10,12 @@ import RootLayout from "layouts/RootLayout";
 import PublicLayout from "layouts/PublicLayout";
 import { useAuthState } from "api/graphql/hooks/app";
 import routes from "./routes";
+import Login from "./auth/Login";
 
 const authRoutes = [
   {
     path: routes.login,
-    element: <h1>Login</h1>,
+    element: <Login />,
   },
   {
     path: routes.register,
@@ -59,7 +60,7 @@ function Auth() {
   return <PublicLayout />;
 }
 
-function Pages() {
+export default function Pages() {
   return (
     <BrowserRouter>
       <Routes>
@@ -82,5 +83,3 @@ function Pages() {
     </BrowserRouter>
   );
 }
-
-export default Pages;

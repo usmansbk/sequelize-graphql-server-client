@@ -3,7 +3,7 @@ import { DarkMode } from "@mui/icons-material";
 import { Outlet } from "react-router-dom";
 import { useAppTheme } from "api/graphql/hooks/app";
 
-function PublicLayout() {
+export default function PublicLayout() {
   const { toggleMode } = useAppTheme();
   return (
     <Box display="flex" flex={1} flexDirection="column">
@@ -16,5 +16,3 @@ function PublicLayout() {
     </Box>
   );
 }
-
-export default PublicLayout;
