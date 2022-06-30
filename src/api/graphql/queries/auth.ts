@@ -37,3 +37,27 @@ export const LOGOUT = gql`
     }
   }
 `;
+
+export const REQUEST_EMAIL_VERIFICATION = gql`
+  mutation RequestEmailVerification($email: EmailAddress!) {
+    requestEmailVerification(email: $email) {
+      code
+      success
+      message
+    }
+  }
+`;
+
+export const VERIFY_EMAIL_ADDRESS = gql`
+  mutation VerifyEmail($token: String!) {
+    verifyEmail(token: $token) {
+      code
+      success
+      message
+      errors {
+        message
+        field
+      }
+    }
+  }
+`;

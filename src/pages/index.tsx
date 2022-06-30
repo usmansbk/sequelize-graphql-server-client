@@ -12,6 +12,7 @@ import { useAuthState } from "api/graphql/hooks/app";
 import routes from "./routes";
 import Login from "./auth/EmailLogin";
 import SignUp from "./auth/SignUp";
+import EmailVerification from "./auth/EmailVerification";
 
 const authRoutes = [
   {
@@ -35,7 +36,7 @@ const authRoutes = [
 const publicRoutes = [
   {
     path: routes.verifyEmail,
-    element: <h1>Verify Email</h1>,
+    element: <EmailVerification />,
   },
 ];
 

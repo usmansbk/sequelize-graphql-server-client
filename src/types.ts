@@ -21,7 +21,7 @@ export type Response = {
   message: string;
 };
 
-interface FormResponse extends Response, FormErrors {}
+export interface FormResponse extends Response, FormErrors {}
 
 export interface DeleteMutationResponse extends Response {
   id: string;
@@ -33,6 +33,14 @@ export interface AuthFormMutationResponse extends FormResponse {
 }
 
 // Input
+
+export type EmailInput = {
+  email: string;
+};
+
+export type TokenInput = {
+  token: string;
+};
 
 export type EmailLoginInput = {
   email: string;

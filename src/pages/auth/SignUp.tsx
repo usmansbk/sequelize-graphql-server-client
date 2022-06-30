@@ -85,7 +85,6 @@ export default function SignUpForm() {
         {...register("lastName")}
       />
       <TextField
-        autoFocus
         fullWidth
         type="email"
         placeholder={t("Email address")}

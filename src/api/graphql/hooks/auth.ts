@@ -1,8 +1,22 @@
 import { useMutation } from "@apollo/client";
 import { useCallback, useMemo } from "react";
-import { AuthFormMutationResponse, EmailLoginInput, SignUpInput } from "types";
+import {
+  AuthFormMutationResponse,
+  EmailLoginInput,
+  FormResponse,
+  SignUpInput,
+  Response,
+  EmailInput,
+  TokenInput,
+} from "types";
 import { AUTH_STATE } from "../queries/app";
-import { EMAIL_LOGIN, LOGOUT, REGISTER_WITH_EMAIL } from "../queries/auth";
+import {
+  EMAIL_LOGIN,
+  LOGOUT,
+  REGISTER_WITH_EMAIL,
+  REQUEST_EMAIL_VERIFICATION,
+  VERIFY_EMAIL_ADDRESS,
+} from "../queries/auth";
 
 export const useEmailLogin = () => {
   const [mutate, { loading, reset, data }] = useMutation(EMAIL_LOGIN);
@@ -96,5 +110,55 @@ export const useLogout = () => {
 
   return {
     onLogout,
+  };
+};
+
+export const useVerifyEmail = () => {
+  const [mutate, { loading, reset, data }] = useMutation(VERIFY_EMAIL_ADDRESS);
+
+  const onVerifyEmail = useCallback(
+    ({ token }: TokenInput) =>
+      mutate({
+        variables: {
+          token,
+        },
+      }),
+    [mutate]
+  );
+  const response = useMemo(() => data?.verifyEmail, [data]) as FormResponse;
+
+  return {
+    onVerifyEmail,
+    reset,
+    loading,
+    response,
+  };
+};
+
+export const useRequestEmailVerification = () => {
+  const [mutate, { loading, data, reset }] = useMutation(
+    REQUEST_EMAIL_VERIFICATION
+  );
+
+  const onRequestVerification = useCallback(
+    ({ email }: EmailInput) =>
+      mutate({
+        variables: {
+          email,
+        },
+      }),
+    [mutate]
+  );
+
+  const response = useMemo(
+    () => data?.requestEmailVerification,
+    [data]
+  ) as Response;
+
+  return {
+    onRequestVerification,
+    loading,
+    response,
+    reset,
   };
 };
