@@ -85,3 +85,23 @@ export const FORGOT_PASSWORD = gql`
     }
   }
 `;
+
+export const DELETE_ACCOUNT = gql`
+  mutation DeleteAccount($token: String!) {
+    deleteAccount(token: $token) {
+      code
+      success
+      message
+    }
+  }
+`;
+
+export const REQUEST_DELETE_ACCOUNT = gql`
+  mutation RequestDeleteAccount {
+    requestDeleteAccount {
+      code
+      success
+      message
+    }
+  }
+`;

@@ -12,10 +12,12 @@ import {
 } from "types";
 import { AUTH_STATE } from "../queries/app";
 import {
+  DELETE_ACCOUNT,
   EMAIL_LOGIN,
   FORGOT_PASSWORD,
   LOGOUT,
   REGISTER_WITH_EMAIL,
+  REQUEST_DELETE_ACCOUNT,
   REQUEST_EMAIL_VERIFICATION,
   RESET_PASSWORD,
   VERIFY_EMAIL_ADDRESS,
@@ -212,6 +214,49 @@ export const useResetPassword = () => {
 
   return {
     onResetPassword,
+    loading,
+    response,
+    reset,
+  };
+};
+
+export const useRequestDeleteAccount = () => {
+  const [mutate, { loading, data, reset }] = useMutation(
+    REQUEST_DELETE_ACCOUNT
+  );
+
+  const onRequestDelete = useCallback(() => mutate(), [mutate]);
+
+  const response = useMemo(
+    () => data?.requestDeleteAccount,
+    [data]
+  ) as Response;
+
+  return {
+    onRequestDelete,
+    loading,
+    response,
+    reset,
+  };
+};
+
+export const useDeleteAccount = () => {
+  const [mutate, { loading, data, reset }] = useMutation(DELETE_ACCOUNT);
+
+  const onDeleteAccount = useCallback(
+    ({ token }: TokenInput) =>
+      mutate({
+        variables: {
+          token,
+        },
+      }),
+    [mutate]
+  );
+
+  const response = useMemo(() => data?.deleteAccount, [data]) as Response;
+
+  return {
+    onDeleteAccount,
     loading,
     response,
     reset,
