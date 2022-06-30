@@ -1,5 +1,3 @@
-import AppLayout from "layouts/AppLayout";
-import RootLayout from "layouts/RootLayout";
 import {
   BrowserRouter,
   Routes,
@@ -8,6 +6,8 @@ import {
   useLocation,
   Outlet,
 } from "react-router-dom";
+import AppLayout from "layouts/AppLayout";
+import RootLayout from "layouts/RootLayout";
 import { useAuthState } from "api/graphql/hooks/auth";
 import routes from "./routes";
 
