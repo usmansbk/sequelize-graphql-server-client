@@ -11,7 +11,6 @@ import toast from "react-hot-toast";
 import i18n from "config/i18n";
 import env from "config/env";
 import Sentry from "config/sentry";
-import axios from "config/axios";
 import apolloCache from "./cache";
 import { AUTH_STATE } from "./queries/auth";
 
@@ -72,39 +71,5 @@ const client = new ApolloClient({
   link: from([sentryLink, errorLink, authLink, httpLink]),
   cache: apolloCache,
 });
-
-axios.interceptors.request.use(
-  (config) => {
-    const data = client.readQuery({
-      query: AUTH_STATE,
-    });
-
-    const token = data?.auth?.accessToken || "";
-
-    return {
-      ...config,
-      headers: {
-        ...config.headers,
-        authorization: token && `Bearer ${token}`,
-        client_id: env.CLIENT_ID,
-      },
-    };
-  },
-  (error) => {
-    toast.error(error.message);
-    return Promise.reject(error);
-  }
-);
-
-axios.interceptors.response.use(
-  (response) => {
-    toast.success(response.data.message);
-    return response;
-  },
-  (error) => {
-    toast.error(error?.response?.data.message || error.message);
-    return Promise.reject(error);
-  }
-);
 
 export default client;
