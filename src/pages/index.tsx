@@ -11,6 +11,7 @@ import PublicLayout from "layouts/PublicLayout";
 import { useAuthState } from "api/graphql/hooks/app";
 import routes from "./routes";
 import Login from "./auth/EmailLogin";
+import SignUp from "./auth/SignUp";
 
 const authRoutes = [
   {
@@ -19,7 +20,7 @@ const authRoutes = [
   },
   {
     path: routes.register,
-    element: <h1>Register</h1>,
+    element: <SignUp />,
   },
   {
     path: routes.forgotPassword,

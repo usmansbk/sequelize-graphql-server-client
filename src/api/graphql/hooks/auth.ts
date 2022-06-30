@@ -1,8 +1,8 @@
 import { useMutation } from "@apollo/client";
 import { useCallback, useMemo } from "react";
-import { AuthFormMutationResponse, EmailLoginInput } from "types";
+import { AuthFormMutationResponse, EmailLoginInput, SignUpInput } from "types";
 import { AUTH_STATE } from "../queries/app";
-import { EMAIL_LOGIN, LOGOUT } from "../queries/auth";
+import { EMAIL_LOGIN, LOGOUT, REGISTER_WITH_EMAIL } from "../queries/auth";
 
 export const useEmailLogin = () => {
   const [mutate, { loading, reset, data }] = useMutation(EMAIL_LOGIN);
@@ -40,6 +40,47 @@ export const useEmailLogin = () => {
   return {
     loading,
     onLogin,
+    reset,
+    response,
+  };
+};
+
+export const useSignUpWithEmail = () => {
+  const [mutate, { loading, reset, data }] = useMutation(REGISTER_WITH_EMAIL);
+
+  const onSignup = useCallback(
+    (input: SignUpInput) =>
+      mutate({
+        variables: {
+          input,
+        },
+        update: (cache, { data: { registerWithEmail } }) => {
+          if (registerWithEmail.success) {
+            const { accessToken, refreshToken } = registerWithEmail;
+            cache.writeQuery({
+              query: AUTH_STATE,
+              data: {
+                auth: {
+                  isLoggedIn: true,
+                  accessToken,
+                  refreshToken,
+                },
+              },
+            });
+          }
+        },
+      }),
+    [mutate]
+  );
+
+  const response = useMemo(
+    () => data?.registerWithEmail,
+    [data]
+  ) as AuthFormMutationResponse;
+
+  return {
+    loading,
+    onSignup,
     reset,
     response,
   };

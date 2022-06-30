@@ -38,3 +38,8 @@ export type EmailLoginInput = {
   email: string;
   password: string;
 };
+
+export interface SignUpInput extends EmailLoginInput {
+  firstName: string;
+  lastName: string;
+}

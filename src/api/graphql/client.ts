@@ -21,7 +21,10 @@ const errorLink = onError(({ graphQLErrors, networkError }) => {
   if (graphQLErrors) {
     graphQLErrors.forEach((e) => {
       const { message, extensions, originalError } = e;
-      if (extensions.code === "UNAUTHENTICATED") {
+      if (
+        extensions.code === "UNAUTHENTICATED" ||
+        extensions.code === "FORBIDDEN"
+      ) {
         toast.error(message);
         apolloCache.writeQuery({
           query: AUTH_STATE,
