@@ -4,11 +4,11 @@ import {
   Route,
   Navigate,
   useLocation,
-  Outlet,
 } from "react-router-dom";
 import AppLayout from "layouts/AppLayout";
 import RootLayout from "layouts/RootLayout";
-import { useAuthState } from "api/graphql/hooks/auth";
+import PublicLayout from "layouts/PublicLayout";
+import { useAuthState } from "api/graphql/hooks/app";
 import routes from "./routes";
 
 function Authenticated() {
@@ -30,7 +30,7 @@ function Unauthenticated() {
     return <Navigate to={routes.home} state={{ from: location }} replace />;
   }
 
-  return <Outlet />;
+  return <PublicLayout />;
 }
 
 function Pages() {

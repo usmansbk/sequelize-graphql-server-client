@@ -1,9 +1,9 @@
 import { Box, IconButton } from "@mui/material";
-import { Outlet } from "react-router-dom";
 import { DarkMode } from "@mui/icons-material";
+import { Outlet } from "react-router-dom";
 import { useAppTheme } from "api/graphql/hooks/app";
 
-function AppLayout() {
+function PublicLayout() {
   const { toggleMode } = useAppTheme();
   return (
     <Box display="flex" flex={1} flexDirection="column">
@@ -17,4 +17,4 @@ function AppLayout() {
   );
 }
 
-export default AppLayout;
+export default PublicLayout;
