@@ -1,4 +1,8 @@
-# Getting Started with Create React App
+# Sequelize GraphQL React App
+
+[![Netlify Status](https://api.netlify.com/api/v1/badges/6ccb5145-50da-494f-96c0-ea9179941f12/deploy-status)](https://app.netlify.com/sites/sequelize-graphql-server-client/deploys)
+
+- [Backend Repo](https://github.com/usmansbk/sequelize-graphql-server)
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
