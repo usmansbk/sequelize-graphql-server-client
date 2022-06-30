@@ -13,6 +13,7 @@ import routes from "./routes";
 import Login from "./auth/EmailLogin";
 import SignUp from "./auth/SignUp";
 import EmailVerification from "./auth/EmailVerification";
+import ForgotPassword from "./auth/ForgotPassword";
 
 const authRoutes = [
   {
@@ -25,7 +26,7 @@ const authRoutes = [
   },
   {
     path: routes.forgotPassword,
-    element: <h1>Forgot Password</h1>,
+    element: <ForgotPassword />,
   },
   {
     path: routes.resetPassword,

@@ -61,3 +61,27 @@ export const VERIFY_EMAIL_ADDRESS = gql`
     }
   }
 `;
+
+export const RESET_PASSWORD = gql`
+  mutation ResetPassword($input: PasswordResetInput!) {
+    resetPassword(input: $input) {
+      code
+      success
+      message
+      errors {
+        message
+        field
+      }
+    }
+  }
+`;
+
+export const FORGOT_PASSWORD = gql`
+  mutation RequestPasswordReset($email: EmailAddress!) {
+    requestPasswordReset(email: $email) {
+      code
+      success
+      message
+    }
+  }
+`;

@@ -12,6 +12,7 @@ import {
 import { AUTH_STATE } from "../queries/app";
 import {
   EMAIL_LOGIN,
+  FORGOT_PASSWORD,
   LOGOUT,
   REGISTER_WITH_EMAIL,
   REQUEST_EMAIL_VERIFICATION,
@@ -157,6 +158,32 @@ export const useRequestEmailVerification = () => {
 
   return {
     onRequestVerification,
+    loading,
+    response,
+    reset,
+  };
+};
+
+export const useForgotPassword = () => {
+  const [mutate, { loading, data, reset }] = useMutation(FORGOT_PASSWORD);
+
+  const onRequestPasswordReset = useCallback(
+    ({ email }: EmailInput) =>
+      mutate({
+        variables: {
+          email,
+        },
+      }),
+    [mutate]
+  );
+
+  const response = useMemo(
+    () => data?.requestPasswordReset,
+    [data]
+  ) as Response;
+
+  return {
+    onRequestPasswordReset,
     loading,
     response,
     reset,

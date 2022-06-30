@@ -6,9 +6,9 @@ import { useNavigate } from "react-router-dom";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { EmailLoginInput } from "types";
 import { useEmailLogin } from "api/graphql/hooks/auth";
 import routes from "pages/routes";
+import { EmailLoginInput } from "types";
 
 export default function EmailLoginForm() {
   const { t } = useTranslation();
