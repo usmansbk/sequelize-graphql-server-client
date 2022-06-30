@@ -1,4 +1,5 @@
 import { InMemoryCache } from "@apollo/client";
+import { PaletteMode } from "@mui/material";
 
 const cache = new InMemoryCache({
   typePolicies: {
@@ -6,6 +7,11 @@ const cache = new InMemoryCache({
       fields: {
         auth: {
           read(value = null) {
+            return value;
+          },
+        },
+        theme: {
+          read(value: PaletteMode = "light") {
             return value;
           },
         },

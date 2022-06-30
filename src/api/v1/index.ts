@@ -3,7 +3,7 @@ import toast from "react-hot-toast";
 import env from "config/env";
 import Sentry from "config/sentry";
 import client from "api/graphql/client";
-import { AUTH_STATE } from "api/graphql/queries/auth";
+import { AUTH_STATE } from "api/graphql/queries/app";
 
 const v1 = axios.create({
   baseURL: env.V1_ENDPOINT,
