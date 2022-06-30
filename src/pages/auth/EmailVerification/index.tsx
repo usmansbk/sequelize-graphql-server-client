@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import { Alert, AlertTitle, Box, Button, LinearProgress } from "@mui/material";
+import { useVerifyEmail } from "api/graphql/hooks/auth";
+import routes from "pages/routes";
 import EmailVerificationForm from "./EmailVerificationForm";
-import { useVerifyEmail } from "../../../api/graphql/hooks/auth";
-import routes from "../../routes";
 
 function VerifyEmail() {
   const { t } = useTranslation();
