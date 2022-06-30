@@ -8,7 +8,7 @@ import { yupResolver } from "@hookform/resolvers/yup";
 import { SignUpInput } from "types";
 import { useSignUpWithEmail } from "api/graphql/hooks/auth";
 
-export default function SignUp() {
+export default function SignUpForm() {
   const { t } = useTranslation();
   const schema = useMemo(
     () =>
