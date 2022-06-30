@@ -5,7 +5,7 @@ import { AUTH_STATE } from "../queries/auth";
 export const useAuthState = () => {
   const { data } = useQuery(AUTH_STATE);
 
-  return data?.auth as AuthState;
+  return (data?.auth || { isLoggedIn: false }) as AuthState;
 };
 
 export default {};
