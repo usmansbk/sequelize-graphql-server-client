@@ -2,7 +2,7 @@ import axios from "axios";
 import toast from "react-hot-toast";
 import env from "config/env";
 import Sentry from "config/sentry";
-import client from "api/graphql/client";
+import cache from "api/cache";
 import { AUTH_STATE } from "api/graphql/queries/app";
 
 const v1 = axios.create({
@@ -11,7 +11,7 @@ const v1 = axios.create({
 
 v1.interceptors.request.use(
   (config) => {
-    const data = client.readQuery({
+    const data: any = cache.readQuery({
       query: AUTH_STATE,
     });
 
@@ -41,7 +41,7 @@ v1.interceptors.response.use(
     const { message, extensions, originalError } = error;
     if (extensions.code === "UNAUTHENTICATED") {
       toast.error(message);
-      client.writeQuery({
+      cache.writeQuery({
         query: AUTH_STATE,
         data: {
           auth: null,

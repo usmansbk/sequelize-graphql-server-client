@@ -11,7 +11,7 @@ import toast from "react-hot-toast";
 import i18n from "config/i18n";
 import env from "config/env";
 import Sentry from "config/sentry";
-import apolloCache from "./cache";
+import apolloCache from "../cache";
 import { AUTH_STATE } from "./queries/app";
 
 const httpLink = new HttpLink({
