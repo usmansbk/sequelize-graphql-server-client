@@ -11,7 +11,7 @@ import PublicLayout from "layouts/PublicLayout";
 import { useAuthState } from "api/graphql/hooks/app";
 import routes from "./routes";
 
-function Authenticated() {
+function Protected() {
   const location = useLocation();
   const { isLoggedIn } = useAuthState();
 
@@ -22,7 +22,7 @@ function Authenticated() {
   return <AppLayout />;
 }
 
-function Unauthenticated() {
+function Auth() {
   const location = useLocation();
   const { isLoggedIn } = useAuthState();
 
@@ -38,7 +38,7 @@ function Pages() {
     <BrowserRouter>
       <Routes>
         <Route element={<RootLayout />}>
-          <Route element={<Unauthenticated />}>
+          <Route element={<Auth />}>
             <Route path={routes.login} element={<h1>Login</h1>} />
             <Route path={routes.register} element={<h1>Register</h1>} />
             <Route
@@ -50,7 +50,7 @@ function Pages() {
               element={<h1>Reset Password</h1>}
             />
           </Route>
-          <Route path={routes.home} element={<Authenticated />}>
+          <Route path={routes.home} element={<Protected />}>
             <Route index element={<h1>Main App</h1>} />
           </Route>
           <Route element={<PublicLayout />}>
