@@ -12,4 +12,12 @@ export const EMAIL_LOGIN = gql`
   }
 `;
 
-export default {};
+export const LOGOUT = gql`
+  mutation Logout {
+    logout {
+      code
+      success
+      message
+    }
+  }
+`;

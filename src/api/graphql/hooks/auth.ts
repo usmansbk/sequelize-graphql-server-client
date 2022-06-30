@@ -1,7 +1,8 @@
 import { useMutation } from "@apollo/client";
 import { useCallback, useMemo } from "react";
 import { AuthFormMutationResponse, EmailLoginInput } from "types";
-import { EMAIL_LOGIN } from "../queries/auth";
+import { AUTH_STATE } from "../queries/app";
+import { EMAIL_LOGIN, LOGOUT } from "../queries/auth";
 
 export const useEmailLogin = () => {
   const [mutate, { loading, reset, data }] = useMutation(EMAIL_LOGIN);
@@ -11,6 +12,21 @@ export const useEmailLogin = () => {
       mutate({
         variables: {
           input,
+        },
+        update: (cache, { data: { loginWithEmail } }) => {
+          if (loginWithEmail.success) {
+            const { accessToken, refreshToken } = loginWithEmail;
+            cache.writeQuery({
+              query: AUTH_STATE,
+              data: {
+                auth: {
+                  isLoggedIn: true,
+                  accessToken,
+                  refreshToken,
+                },
+              },
+            });
+          }
         },
       }),
     [mutate]
@@ -29,4 +45,15 @@ export const useEmailLogin = () => {
   };
 };
 
-export default {};
+export const useLogout = () => {
+  const [mutate, { client }] = useMutation(LOGOUT);
+
+  const onLogout = useCallback(async () => {
+    mutate();
+    client.resetStore();
+  }, [mutate]);
+
+  return {
+    onLogout,
+  };
+};
