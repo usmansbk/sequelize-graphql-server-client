@@ -244,12 +244,13 @@ export const useDeleteAccount = () => {
   const [mutate, { loading, data, reset }] = useMutation(DELETE_ACCOUNT);
 
   const onDeleteAccount = useCallback(
-    ({ token }: TokenInput) =>
-      mutate({
+    async ({ token }: TokenInput) => {
+      await mutate({
         variables: {
           token,
         },
-      }),
+      });
+    },
     [mutate]
   );
 

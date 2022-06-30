@@ -5,4 +5,5 @@ export default {
   forgotPassword: "/forgot_password",
   resetPassword: "/reset_password",
   verifyEmail: "/verify_email",
+  deleteAccount: "/delete_account",
 };

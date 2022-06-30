@@ -15,6 +15,8 @@ import SignUp from "./auth/SignUp/SignUpForm";
 import EmailVerification from "./auth/EmailVerification";
 import ForgotPassword from "./auth/ForgotPassword";
 import ResetPassword from "./auth/ResetPassword";
+import DeleteAccount from "./auth/DeleteAccount";
+import Home from "./home";
 
 const authRoutes = [
   {
@@ -35,10 +37,16 @@ const authRoutes = [
   },
 ];
 
+// const mainRoutes = [];
+
 const publicRoutes = [
   {
     path: routes.verifyEmail,
     element: <EmailVerification />,
+  },
+  {
+    path: routes.deleteAccount,
+    element: <DeleteAccount />,
   },
 ];
 
@@ -75,7 +83,10 @@ export default function Pages() {
             ))}
           </Route>
           <Route path={routes.home} element={<Protected />}>
-            <Route index element={<h1>Main App</h1>} />
+            <Route index element={<Home />} />
+            {/* {mainRoutes.map(({ path, element }) => (
+              <Route key={path} path={path} element={element} />
+            ))} */}
           </Route>
           <Route element={<PublicLayout />}>
             {publicRoutes.map(({ path, element }) => (
