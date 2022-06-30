@@ -51,3 +51,8 @@ export interface SignUpInput extends EmailLoginInput {
   firstName: string;
   lastName: string;
 }
+
+export type ResetPasswordInput = {
+  password: string;
+  token: string;
+};

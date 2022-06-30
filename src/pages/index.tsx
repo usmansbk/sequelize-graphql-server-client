@@ -11,9 +11,10 @@ import PublicLayout from "layouts/PublicLayout";
 import { useAuthState } from "api/graphql/hooks/app";
 import routes from "./routes";
 import Login from "./auth/EmailLogin";
-import SignUp from "./auth/SignUp";
+import SignUp from "./auth/SignUp/SignUpForm";
 import EmailVerification from "./auth/EmailVerification";
 import ForgotPassword from "./auth/ForgotPassword";
+import ResetPassword from "./auth/ResetPassword";
 
 const authRoutes = [
   {
@@ -30,7 +31,7 @@ const authRoutes = [
   },
   {
     path: routes.resetPassword,
-    element: <h1>Reset Password</h1>,
+    element: <ResetPassword />,
   },
 ];
 

@@ -8,6 +8,7 @@ import {
   Response,
   EmailInput,
   TokenInput,
+  ResetPasswordInput,
 } from "types";
 import { AUTH_STATE } from "../queries/app";
 import {
@@ -16,6 +17,7 @@ import {
   LOGOUT,
   REGISTER_WITH_EMAIL,
   REQUEST_EMAIL_VERIFICATION,
+  RESET_PASSWORD,
   VERIFY_EMAIL_ADDRESS,
 } from "../queries/auth";
 
@@ -184,6 +186,32 @@ export const useForgotPassword = () => {
 
   return {
     onRequestPasswordReset,
+    loading,
+    response,
+    reset,
+  };
+};
+
+export const useResetPassword = () => {
+  const [mutate, { loading, data, reset }] = useMutation(RESET_PASSWORD);
+
+  const onResetPassword = useCallback(
+    ({ password, token }: ResetPasswordInput) =>
+      mutate({
+        variables: {
+          input: {
+            password,
+            token,
+          },
+        },
+      }),
+    [mutate]
+  );
+
+  const response = useMemo(() => data?.resetPassword, [data]) as Response;
+
+  return {
+    onResetPassword,
     loading,
     response,
     reset,
