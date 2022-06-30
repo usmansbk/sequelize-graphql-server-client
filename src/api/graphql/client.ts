@@ -5,7 +5,6 @@ import {
   from,
   HttpLink,
 } from "@apollo/client";
-import { SentryLink } from "apollo-link-sentry";
 import { onError } from "@apollo/client/link/error";
 import toast from "react-hot-toast";
 import i18n from "config/i18n";
@@ -61,14 +60,10 @@ const authLink = new ApolloLink((operation, forward) => {
   return forward(operation);
 });
 
-const sentryLink = new SentryLink({
-  uri: env.GRAPHQL_ENDPOINT,
-});
-
 const client = new ApolloClient({
   name: env.APP_NAME,
   version: env.APP_VERSION,
-  link: from([sentryLink, errorLink, authLink, httpLink]),
+  link: from([errorLink, authLink, httpLink]),
   cache: apolloCache,
 });
 
