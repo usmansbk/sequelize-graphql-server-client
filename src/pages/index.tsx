@@ -53,7 +53,9 @@ function Pages() {
           <Route path={routes.home} element={<Authenticated />}>
             <Route index element={<h1>Main App</h1>} />
           </Route>
-          <Route path={routes.verifyEmail} element={<h1>Verify Email</h1>} />
+          <Route element={<PublicLayout />}>
+            <Route path={routes.verifyEmail} element={<h1>Verify Email</h1>} />
+          </Route>
         </Route>
       </Routes>
     </BrowserRouter>
