@@ -1,6 +1,7 @@
 import axios from "axios";
 import toast from "react-hot-toast";
 import env from "config/env";
+import Sentry from "config/sentry";
 import client from "api/graphql/client";
 import { AUTH_STATE } from "api/graphql/queries/auth";
 
@@ -37,7 +38,19 @@ v1.interceptors.response.use(
     return response;
   },
   (error) => {
-    toast.error(error?.response?.data.message || error.message);
+    const { message, extensions, originalError } = error;
+    if (extensions.code === "UNAUTHENTICATED") {
+      toast.error(message);
+      client.writeQuery({
+        query: AUTH_STATE,
+        data: {
+          auth: null,
+        },
+      });
+    } else {
+      toast.error(error?.response?.data.message || error.message);
+      Sentry.captureException(originalError);
+    }
     return Promise.reject(error);
   }
 );
