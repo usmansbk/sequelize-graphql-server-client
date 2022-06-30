@@ -5,8 +5,8 @@ import { useTranslation } from "react-i18next";
 import { useForm } from "react-hook-form";
 import * as yup from "yup";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { EmailInput } from "types";
 import { useRequestEmailVerification } from "api/graphql/hooks/auth";
+import { EmailInput } from "types";
 
 export default function EmailVerificationForm() {
   const { t } = useTranslation();
